@@ -194,6 +194,10 @@ php artisan migrate:rollback
 
 * Recuerda que este proyecto se inicio en un equipo con windows 10, para linux y Mac pudieran variar algunos pasos o necesitar algunos directorios permisos de lectura y escritura.
 
+* Yo utilicé Sqlite que es el que viene por defecto en el proyecto de Laravel, pero puedes usar la BD de tu elección.
+
+* Solo recuerda que si utilizas Sqlite debes crear el archivo database.sqlite en la ruta de database. También te recomiendo instalar el plugin de Sql Viewer de Florian Klampfer.
+
 * Desde aqui creo que ya puedes crear rutas, vistas y estilos, ya queda a tu consideracion el resto del proyecto.
 
 
