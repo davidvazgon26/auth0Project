@@ -24,7 +24,7 @@
         @csrf
         <div>
             <label for="username">Usuario:</label>
-            <input type="text" id="username" name="username" value="{{ old('username') }}" required>
+            <input type="text" id="email" name="email" value="{{ old('email') }}" required>
         </div>
 
         <div>

@@ -12,30 +12,47 @@ class AuthDemoController extends Controller
 {
     //
 
-    public function loginLocal(Request $request)
-    {
-         // Validar los datos del formulario
-         $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
-        ]);
+        //OJO lo puse con email en lugar de con el username
+        public function loginLocal(Request $request)
+        {
+            // Validar los datos del formulario
+            $request->validate([
+                'email' => 'required|string',
+                'password' => 'required|string',
+            ]);
 
-        $credentials = [
-            'username' => $request->input('username'),
-            'password' => $request->input('password'),
-        ];
+            $credentials = [
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+            ];
 
-        // Intentar iniciar sesión usando el guard local
-        if (Auth::guard('web')->attempt($credentials)) {
-            // Si la autenticación es exitosa, redirigir al usuario a su página de inicio
-            return redirect()->intended('main');
+            // Intentar iniciar sesión usando el guard local
+            if (Auth::guard('web')->attempt($credentials)) {
+                // Si la autenticación es exitosa, redirigir al usuario a su página de inicio
+                return redirect('/main');
+            }
+
+            // Si la autenticación falla, volver al formulario de inicio de sesión con un error
+            return back()->withErrors([
+                'username' => 'Las credenciales no coinciden con nuestros registros.',
+            ])->onlyInput('name');
         }
 
-        // Si la autenticación falla, volver al formulario de inicio de sesión con un error
-        return back()->withErrors([
-            'username' => 'Las credenciales no coinciden con nuestros registros.',
-        ])->onlyInput('username');
-    }
+        public function logoutLocal(Request $request)
+        {
+            // Cerrar la sesión del usuario
+            Auth::guard('web')->logout();
+
+            // Opcional: Invalidar la sesión del usuario
+            $request->session()->invalidate();
+
+            // Opcional: Regenerar el token de la sesión para evitar ataques de fijación de sesión
+            $request->session()->regenerateToken();
+
+            // Redirigir al usuario a la página de inicio o a donde desees
+            return redirect('/');
+        }
+
 
        // Manejar el registro del usuario
        public function register(Request $request)

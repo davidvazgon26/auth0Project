@@ -9,3 +9,8 @@
     @csrf
     <button type="submit">Cerrar Sesión Auth0</button>
 </form>
+
+<form action="{{ route('logoutLocal') }}" method="POST">
+    @csrf
+    <button type="submit">Cerrar Sesión Local</button>
+</form>

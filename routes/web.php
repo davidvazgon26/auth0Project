@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthDemoController;
 // ******** rutas
 
 Route::post('/loginLocal', [AuthDemoController::class, 'loginLocal'])->name('loginLocal');
+Route::post('/logoutLocal', [AuthDemoController::class, 'logoutLocal'])->name('logoutLocal');
 // del formulario de registro
 Route::post('/register', [AuthDemoController::class, 'register'])->name('register');
 
@@ -27,6 +28,10 @@ Route::get('/private', function () {
 Route::get('/main', function () {
     return view('main');
 }) -> middleware('auth');
+
+Route::get('/main', function () {
+    return view('main');
+}) -> middleware('web');
 
 
 Route::get('/register', function () {
